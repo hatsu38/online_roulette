@@ -1,8 +1,8 @@
 import React, { useRef, useEffect, useState, FC } from "react";
 import { drawRoulette } from "@/app/home/utils/drawRoulette";
 
-import lottie from 'lottie-web';
-import animationData from '@/app/home/assets/animation.json';
+import lottie from "lottie-web";
+import animationData from "@/app/home/assets/animation.json";
 
 type RoulettePropsType = {
   selectors: {
@@ -14,7 +14,7 @@ type RoulettePropsType = {
 export const Roulette: FC<RoulettePropsType> = ({ selectors }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const spinAngleRef = useRef<number>(0);
-  const [spinStatus, setSpinStatus] = useState<'stopped' | 'spinning' | 'stopping'>('stopped');
+  const [spinStatus, setSpinStatus] = useState<"stopped" | "spinning" | "stopping">("stopped");
   const spinSpeedRef = useRef<number>(0);
   const animationRef = useRef<HTMLDivElement | null>(null); 
 
@@ -22,7 +22,7 @@ export const Roulette: FC<RoulettePropsType> = ({ selectors }) => {
     if (animationRef.current) {
       lottie.loadAnimation({
         container: animationRef.current,
-        renderer: 'svg',
+        renderer: "svg",
         loop: true,
         autoplay: false,
         animationData,
@@ -51,12 +51,12 @@ export const Roulette: FC<RoulettePropsType> = ({ selectors }) => {
 
     const spin = () => {
       spinAngleRef.current += spinSpeedRef.current; // スピードを加える
-      if (spinStatus === 'spinning') {
+      if (spinStatus === "spinning") {
         spinSpeedRef.current = Math.min(spinSpeedRef.current + 0.001, 0.4); // 加速
-      } else if (spinStatus === 'stopping') {
+      } else if (spinStatus === "stopping") {
         spinSpeedRef.current = Math.max(spinSpeedRef.current - 0.01, 0); // 減速
         if (spinSpeedRef.current <= 0) {
-          setSpinStatus('stopped'); // 完全に停止
+          setSpinStatus("stopped"); // 完全に停止
           if (animationRef.current) {
             lottie.play(); // Lottieアニメーションを再生
           }
@@ -74,16 +74,16 @@ export const Roulette: FC<RoulettePropsType> = ({ selectors }) => {
   }, [spinStatus, selectors]);
 
   const spinRoulette = () => {
-    if (spinStatus === 'stopped') {
-      setSpinStatus('spinning');
+    if (spinStatus === "stopped") {
+      setSpinStatus("spinning");
       spinSpeedRef.current = 0.05; // スピードを初期化
       lottie.stop(); // Lottieアニメーションを停止
     }
   };
 
   const stopRoulette = () => {
-    if (spinStatus === 'spinning') {
-      setSpinStatus('stopping');
+    if (spinStatus === "spinning") {
+      setSpinStatus("stopping");
     }
   };
 
@@ -96,13 +96,13 @@ export const Roulette: FC<RoulettePropsType> = ({ selectors }) => {
       <div className="absolute bottom-0 -z-10" ref={animationRef} />
       <div className="flex justify-center gap-x-4 mt-8">
         <button
-          disabled={spinStatus === 'spinning'}
+          disabled={spinStatus === "spinning"}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full disabled:opacity-50 disabled:cursor-not-allowed"
           onClick={spinRoulette}>
             Start
         </button>
         <button
-          disabled={spinStatus !== 'spinning'}
+          disabled={spinStatus !== "spinning"}
           className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full disabled:opacity-50 disabled:cursor-not-allowed"
           onClick={stopRoulette}>
             Stop
