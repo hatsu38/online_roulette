@@ -1,3 +1,14 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  "rules": {
+    // 0は無効、1は警告、2はエラー
+    "indent": "off", // インデントはprettierで管理
+    "linebreak-style": ["error", "unix"], // 改行コードは\n
+    "quotes": ["error", "double"], // ダブルオーテーションで文字列を囲う
+    "semi": ["error", "always"], // セミコロンを必須にする
+    "prefer-const": "error", // 再代入を行わない変数はconstを利用
+    "no-var": "error", // var禁止
+    "no-debugger": "error", // デバッガーは残さない
+    "no-unused-vars": "off" // TypeScriptに対応していないのでOff
+  }
 }

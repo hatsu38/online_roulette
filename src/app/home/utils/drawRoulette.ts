@@ -21,9 +21,9 @@ export const drawRoulette = (
     ctx.save();
     ctx.translate(radius, radius);
     ctx.rotate(startAngle + angleStep / 2);
-    ctx.textAlign = 'right';
-    ctx.fillStyle = 'black';
-    ctx.font = '20px Arial';
+    ctx.textAlign = "right";
+    ctx.fillStyle = "black";
+    ctx.font = "20px Arial";
     ctx.fillText(selector.name, radius - 10, 10);
     ctx.restore();
   });
