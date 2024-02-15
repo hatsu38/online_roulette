@@ -15,7 +15,7 @@ jobs:
       - name: Latest Job Id of this Pull Request
         id: job
         run: |
-          jobId=gh run list -b ${{  github.base_ref }} -w "CI" --json databaseId --jq '.[0].databaseId'      
+          jobId=gh run list -b ${{ github.event.issue.pull_request.head.sha }} -w "CI" --json databaseId --jq '.[0].databaseId'
           echo $jobId
           echo "jobId=$jobId" >> $GITHUB_OUTPUT
 
