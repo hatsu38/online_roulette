@@ -1,0 +1,26 @@
+name: GH-bot
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  build:
+    if: github.event.issue.pull_request != null && "${{ startsWith(github.event.comment.body, '/hey bot') }}"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Latest Job Id of this Pull Request
+        id: job
+        run: |
+          jobId=gh run list -b ${{  github.base_ref }} -w "CI" --json databaseId --jq '.[0].databaseId'      
+          echo $jobId
+          echo "jobId=$jobId" >> $GITHUB_OUTPUT
+
+      - name: comment on PR
+        run: |
+          gh pr comment ${{ github.event.issue.number }} -b "Hello, I'm a bot.
+          The latest job id is ${{ steps.job.outputs.jobId }}"
+

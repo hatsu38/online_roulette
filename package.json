@@ -6,8 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "lint:fix": "next lint --fix"
+    "lint": "next lint --max-warnings=0",
+    "lint:fix": "next lint --fix",
+    "type:check": "tsc --noEmit"
   },
   "dependencies": {
     "lottie-web": "^5.12.2",
