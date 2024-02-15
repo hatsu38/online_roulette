@@ -12,10 +12,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: get branch name
+        id: branch
+        run: |
+          branchName=$(gh pr view ${{ github.event.issue.number }} --json headRefName --jq '.headRefName')
+          echo $branchName
+          echo "branchName=$branchName" >> $GITHUB_OUTPUT
+
       - name: Latest Job Id of this Pull Request
         id: job
         run: |
-          jobId=gh run list -b ${{ github.event.issue.pull_request.head.sha }} -w "CI" --json databaseId --jq '.[0].databaseId'
+          jobId=$(gh run list -b ${{ steps.branch.outputs.branchName }} -w "CI" --json databaseId --jq '.[0].databaseId')
           echo $jobId
           echo "jobId=$jobId" >> $GITHUB_OUTPUT
 
