@@ -89,11 +89,11 @@ export const Roulette: FC<RoulettePropsType> = ({ selectors }) => {
 
   return (
     <div className="relative">
-      <canvas ref={canvasRef} width="350" height="350" />
+      <canvas ref={canvasRef} width="320" height="320" />
       <div className="absolute top-0 right-1/2 translate-x-1/2 -translate-y-1/2 rotate-270 justify-content-center text-2xl cursor-pointer transform flex bg-transparent text-red-500 z-10 direction-ltr scale-x-20">
         ▼
       </div>
-      <div className="absolute bottom-0 -z-10" ref={animationRef} />
+      <div className="fixed left-0 right-0 top-0 -z-10" ref={animationRef} />
       <div className="flex justify-center gap-x-4 mt-8">
         <button
           disabled={spinStatus === "spinning"}
