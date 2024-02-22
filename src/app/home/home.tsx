@@ -52,7 +52,7 @@ export const Home = () => {
 
   return (
     <div className="App">
-      <div className="flex flex-col items-center justify-center max-h-dvh">
+      <div className="flex flex-col items-center justify-center">
         <h1 className="text-4xl font-bold mt-24 mb-8">ルーレットOnline</h1>
         <Roulette selectors={selectors} />
         {detailSettingOpen ? (
